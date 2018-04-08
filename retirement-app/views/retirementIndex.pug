@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='age') Current Age:
+      input#age.form-control(type='text' placeholder='Current Age' name='age' required='true')
+    div.form-group
+      label(for='age_retirement') Retirement Age:
+      input#age_retirement.form-control(type='text' placeholder='Estimated age at retirement' name='age_retirement' required='true')
+    div.form-group
+      label(for='age_death') Age of death:
+      input#age_death.form-control(type='text' placeholder='Estimated age at death' name='age_death' required='true')
+    div.form-group
+      label(for='savings') Current Savings:
+      input#savings.form-control(type='text' placeholder='Current Retirement Savings ($)' name='savings' required='true')
+    div.form-group
+      label(for='ror') Rate of Return:
+      input#ror.form-control(type='text' placeholder='Estimated annual rate of return on savings (%)' name='ror' required='true')
+    div.form-group
+      label(for='ror_option') Minimize investment risk with a lower reflected risk, accepting a lower rate of return?
+      select#ror_option.form-control(type='select' placeholder='Select Option' name='ror_option' required='true')
+        option(value='no') No
+        option(value='yes') Yes
+    div.form-group
+      label(for='income') Income:
+      input#income.form-control(type='text' placeholder='Income this year ($)' name='income' required='true')
+    div.form-group
+      label(for='income_rise') Income Rise:
+      input#income_rise.form-control(type='text' placeholder='Average yearly rise in income (%)' name='income_rise' required='true')
+    div.form-group
+      label(for='income_to_savings_percent') Amount of Income to Savings:
+      input#income_to_savings_percent.form-control(type='text' placeholder='Percentage of each year\'s income to be added to retirement savings (%)' name='income_to_savings_percent' required='true')
+    div.form-group
+      label(for='ror_post') Rate of Return post retirement:
+      input#ror_post.form-control(type='text' placeholder='Estimated annual rate of return post retirement (%)' name='ror_post' required='true')
+    div.form-group
+      label(for='retirement_income') Income from other sources:
+      input#retirement_income.form-control(type='text' placeholder='Monthly income from other sources post retirement (Social Security, etc.) ($)' name='retirement_income' required='true')
+    div.form-group
+      label(for='retirement_expenses') Retirement Expenses:
+      input#retirement_expenses.form-control(type='text' placeholder='Monthly expenses post retirement ($)' name='age' required='true')
+    div.form-group
+      label(for='inflation_rate') Current Age:
+      input#inflation_rate.form-control(type='text' placeholder='Inflation Rate (%)' name='inflation_rate' required='true' value='3.22')    
+    button.btn.btn-primary(type='submit') Submit
+  
+  if errors
+    ul
+      for error in errors
+        li!=error.msg
+    
