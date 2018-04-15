@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1= title
+
+  h3 Summary
+
+  table
+    tr
+        th
+        th
+        th(class='head') Retirement Account Balance
+    tr
+        td(class='yearText') Year Now: 
+        td(class='years')= year
+        td= savings
+    tr
+        td(class='yearText') Start of Retirement:
+        td= yearStart
+        td= fv
+    tr  
+        td(class='yearText') End of Retirement:
+        td= yearEnd
+        td Not implemented yet.
+    tr
+    
