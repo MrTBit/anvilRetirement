@@ -4,6 +4,9 @@
   list-style: none;
 }
 
+.warning{
+  color: red;
+}
 
 table{
   width: fit-content;
@@ -11,6 +14,10 @@ table{
 
 td{
   border-bottom: 1px solid darkgray;
+}
+
+th{
+  padding-right: 4px;
 }
 
 .yearText{

@@ -13,14 +13,42 @@ block content
     tr
         td(class='yearText') Year Now: 
         td(class='years')= year
-        td= savings
+        td= '$' + Math.round(savings)
     tr
         td(class='yearText') Start of Retirement:
         td= yearStart
-        td= fv
+        td= '$' + Math.round(fv)
     tr  
         td(class='yearText') End of Retirement:
         td= yearEnd
-        td Not implemented yet.
+        td= '$' + Math.round(endBalanceCol[yearEnd-yearStart])
     tr
+
+  br
+  br
+
+  h4 Schedule of Withdrawals
+
+  table
+    tr
+        th(class='head') Age
+        th(class='head') Year
+        th(class='head') Start Balance
+        th(class='head') Retirement Income (SS)
+        th(class='head') Annual Expenses
+        th(class='head') End Balance
+    each age, index in ageCol
+        tr
+            td= ageCol[index]
+            td(class='yearText')= yearCol[index]
+            td= '$' + Math.round(startBalCol[index])
+            td= '$' + retirementIncomeCol[index]
+            td= '$' + Math.round(annualExpenseCol[index])
+            td= '$' + Math.round(endBalanceCol[index])
+        
+    tr
+
+    if endBalanceCol[yearEnd-yearStart] < 0
+        h1(class='warning') Warning! You may not be saving enough for retirement!
+
     

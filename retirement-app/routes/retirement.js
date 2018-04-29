@@ -42,12 +42,33 @@ router.post('/', function(req, res, next){
       return fv;
     }
 
-
-
     var fv = FV(ror, age_retirement-age, (income*income_to_savings_percent),savings);
 
+    var ageCol = []
+    var yearCol = []
+    var startBalCol = []
+    var retirementIncomeCol = []
+    var annualExpenseCol = []
+    var endBalanceCol = []
 
-    res.render('retirementPost', {title: 'Retirement App Results', year: yearCurrent, yearStart: yearCurrent+(age_retirement-age), yearEnd: yearCurrent+(age_death-age), savings: '$' + savings.toFixed(2), fv: '$' + fv.toFixed(2)});
+    startBalCol.push(fv)
+    annualExpenseCol.push(retirement_expenses * 12)
+
+    for(i = age_retirement; i <= age_death; i++){
+      if(!startBalCol[i-age_retirement]){
+        startBalCol.push(endBalanceCol[i-age_retirement-1])
+        annualExpenseCol.push(annualExpenseCol[i-age_retirement-1]*(1+inflation_rate))
+      }
+      ageCol.push(i)
+      yearCol.push((yearCurrent + (age_retirement - age)) + (i - age_retirement))
+      retirementIncomeCol.push(12*retirement_income)
+      endBalanceCol.push((startBalCol[i-age_retirement]*(1+ror_post)+retirementIncomeCol[i-age_retirement]-annualExpenseCol[i-age_retirement]))
+    }
+
+
+    res.render('retirementPost', {title: 'Retirement App Results', year: yearCurrent, yearStart: yearCurrent+(age_retirement-age), 
+    yearEnd: yearCurrent+(age_death-age), savings: savings, fv: fv, ageCol: ageCol,
+    yearCol: yearCol, startBalCol: startBalCol, retirementIncomeCol: retirementIncomeCol, annualExpenseCol: annualExpenseCol, endBalanceCol: endBalanceCol});
 });
 
 module.exports = router;
